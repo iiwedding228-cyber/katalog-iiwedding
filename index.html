@@ -1,0 +1,844 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>iiwedding - Pusat Undangan Digital</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --bg-primary: #e8fffb;
+            --accent-color: #06d2b3;
+            --text-primary: #1f2937;
+            --text-secondary: #6b7280;
+        }
+        
+        body {
+            background-color: var(--bg-primary);
+        }
+        
+        .accent-bg {
+            background-color: var(--accent-color);
+        }
+        
+        .accent-text {
+            color: var(--accent-color);
+        }
+        
+        .accent-border {
+            border-color: var(--accent-color);
+        }
+        
+        .accent-hover:hover {
+            background-color: var(--accent-color);
+            color: white;
+        }
+        
+        .accent-hover-reverse:hover {
+            background-color: var(--bg-primary);
+            color: var(--accent-color);
+        }
+        
+        .fade-in {
+            animation: fadeIn 0.6s ease-in;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+
+        
+        .lazy-load {
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+        
+        .lazy-load.loaded {
+            opacity: 1;
+        }
+        
+        .feature-card {
+            transition: all 0.3s ease;
+            border-radius: 1.5rem;
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+        }
+        
+        .product-card {
+            transition: all 0.3s ease;
+            border-radius: 1.25rem;
+        }
+        
+        .product-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        }
+        
+        .btn-small {
+            font-size: 0.65rem;
+            border-radius: 1.25rem;
+        }
+        
+        @media (min-width: 768px) {
+            .btn-small {
+                font-size: 0.6rem;
+                padding: 0.5rem 0.75rem;
+            }
+        }
+        
+        .social-btn {
+            border-radius: 1.25rem;
+        }
+        
+        .category-pill {
+            border-radius: 1.25rem;
+        }
+        
+        .category-pill {
+            transition: all 0.2s ease;
+        }
+        
+        .category-pill.active {
+            background-color: var(--accent-color);
+            color: white;
+        }
+        
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        
+        ::-webkit-scrollbar-track {
+            background: #f1f1f1;
+        }
+        
+        ::-webkit-scrollbar-thumb {
+            background: var(--accent-color);
+            border-radius: 4px;
+        }
+        
+        ::-webkit-scrollbar-thumb:hover {
+            background: #05b89a;
+        }
+    </style>
+</head>
+<body class="min-h-screen">
+    <!-- Header Navigation -->
+    <header class="sticky top-0 z-50 bg-white shadow-md">
+        <nav class="container mx-auto px-4 py-4">
+            <div class="flex justify-between items-center">
+                <!-- Logo and Brand -->
+                <div class="flex items-center space-x-3">
+                    <img src="https://i.ibb.co.com/tMhCh0FJ/Logo-Warna-2x-Kompres.png" alt="iiwedding" class="h-10 w-auto">
+                    <span class="text-xl font-bold text-gray-800">iiwedding</span>
+                </div>
+                
+                <!-- Navigation Links -->
+                <div class="hidden md:flex items-center space-x-6">
+                    <a href="#katalog" class="text-gray-700 hover:text-accent-color transition-colors">Katalog</a>
+                    <a href="https://api.whatsapp.com/send?phone=6282138860484&text=Halo%20kak%20%F0%9F%A4%97%20Saya%20mau%20tanya%20tentang%20undangan%20digital%20iiwedding" 
+                       target="_blank" class="text-gray-700 hover:text-accent-color transition-colors">Hubungi Kami</a>
+                    <a href="#catatan" class="text-gray-700 hover:text-accent-color transition-colors">Catatan</a>
+                </div>
+                
+                <!-- Mobile Menu Button -->
+                <button id="mobileMenuBtn" class="md:hidden text-gray-700">
+                    <i class="fas fa-bars text-xl"></i>
+                </button>
+            </div>
+            
+            <!-- Mobile Menu -->
+            <div id="mobileMenu" class="hidden md:hidden mt-4 pb-4">
+                <a href="#katalog" class="block py-2 text-gray-700 hover:text-accent-color transition-colors">Katalog</a>
+                <a href="https://api.whatsapp.com/send?phone=6282138860484&text=Halo%20kak%20%F0%9F%A4%97%20Saya%20mau%20tanya%20tentang%20undangan%20digital%20iiwedding" 
+                   target="_blank" class="block py-2 text-gray-700 hover:text-accent-color transition-colors">Hubungi Kami</a>
+                <a href="#catatan" class="block py-2 text-gray-700 hover:text-accent-color transition-colors">Catatan</a>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="py-20 px-4">
+        <div class="container mx-auto text-center">
+            <div class="fade-in">
+                <img src="https://i.ibb.co.com/tMhCh0FJ/Logo-Warna-2x-Kompres.png" alt="iiwedding" class="h-20 w-auto mx-auto mb-6">
+                <h1 class="text-4xl md:text-5xl font-bold text-gray-800 mb-4">iiwedding</h1>
+                <p class="text-2xl md:text-3xl accent-text font-semibold mb-6">Pusat Undangan Digital</p>
+                <p class="text-lg text-gray-600 max-w-2xl mx-auto mb-8">
+                    Buat momen spesialmu lebih berkesan dengan undangan digital yang elegan
+                </p>
+                <div class="flex justify-center space-x-4">
+                    <a href="https://www.instagram.com/iiwedding_undangan_digital?igsh=MTZja2J5aTI3c3llbg==" 
+                       target="_blank" class="social-btn border-2 border-accent-color accent-text px-6 py-3 accent-hover">
+                        <i class="fab fa-instagram mr-2"></i> Instagram
+                    </a>
+                    <a href="https://api.whatsapp.com/send?phone=6282138860484&text=Halo%20kak%20%F0%9F%A4%97%20Saya%20mau%20tanya%20tentang%20undangan%20digital%20iiwedding" 
+                       target="_blank" class="social-btn accent-bg text-white px-6 py-3 hover:opacity-90 transition-opacity">
+                        <i class="fab fa-whatsapp mr-2"></i> WhatsApp
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="py-16 px-4" style="background-color: #e8fffb;">
+        <div class="container mx-auto">
+            <h2 class="text-3xl font-bold text-center text-gray-800 mb-4">Fitur Undangan Website</h2>
+            <p class="text-center text-gray-600 mb-12 max-w-3xl mx-auto">
+                Fitur lengkap undangan website untuk memudahkan tamu undangan dan melengkapi keindahan pernikahanmu
+            </p>
+            <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+                <div class="feature-card bg-white p-6 shadow-md text-center border border-accent-color">
+                    <div class="accent-bg text-white w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <i class="fas fa-camera text-xl"></i>
+                    </div>
+                    <h3 class="font-semibold text-gray-800">Foto Galeri</h3>
+                </div>
+                <div class="feature-card bg-white p-6 shadow-md text-center border border-accent-color">
+                    <div class="accent-bg text-white w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <i class="fas fa-hourglass-half text-xl"></i>
+                    </div>
+                    <h3 class="font-semibold text-gray-800">Countdown Acara</h3>
+                </div>
+                <div class="feature-card bg-white p-6 shadow-md text-center border border-accent-color">
+                    <div class="accent-bg text-white w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <i class="fas fa-ring text-xl"></i>
+                    </div>
+                    <h3 class="font-semibold text-gray-800">Informasi Pengantin</h3>
+                </div>
+                <div class="feature-card bg-white p-6 shadow-md text-center border border-accent-color">
+                    <div class="accent-bg text-white w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <i class="fas fa-map-marked-alt text-xl"></i>
+                    </div>
+                    <h3 class="font-semibold text-gray-800">Peta Lokasi</h3>
+                </div>
+                <div class="feature-card bg-white p-6 shadow-md text-center border border-accent-color">
+                    <div class="accent-bg text-white w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <i class="fas fa-headphones text-xl"></i>
+                    </div>
+                    <h3 class="font-semibold text-gray-800">Request Musik</h3>
+                </div>
+                <div class="feature-card bg-white p-6 shadow-md text-center border border-accent-color">
+                    <div class="accent-bg text-white w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <i class="fas fa-gift text-xl"></i>
+                    </div>
+                    <h3 class="font-semibold text-gray-800">Amplop Digital</h3>
+                </div>
+                <div class="feature-card bg-white p-6 shadow-md text-center border border-accent-color">
+                    <div class="accent-bg text-white w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <i class="fas fa-check-circle text-xl"></i>
+                    </div>
+                    <h3 class="font-semibold text-gray-800">RSVP & QR Code</h3>
+                </div>
+                <div class="feature-card bg-white p-6 shadow-md text-center border border-accent-color">
+                    <div class="accent-bg text-white w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <i class="fas fa-heart text-xl"></i>
+                    </div>
+                    <h3 class="font-semibold text-gray-800">Love Story</h3>
+                </div>
+                <div class="feature-card bg-white p-6 shadow-md text-center border border-accent-color">
+                    <div class="accent-bg text-white w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <i class="fas fa-comment-dots text-xl"></i>
+                    </div>
+                    <h3 class="font-semibold text-gray-800">Ucapan & Do'a</h3>
+                </div>
+                <div class="feature-card bg-white p-6 shadow-md text-center border border-accent-color">
+                    <div class="accent-bg text-white w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <i class="fas fa-envelope text-xl"></i>
+                    </div>
+                    <h3 class="font-semibold text-gray-800">Kirim Undangan</h3>
+                </div>
+                <div class="feature-card bg-white p-6 shadow-md text-center border border-accent-color">
+                    <div class="accent-bg text-white w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <i class="fas fa-user-friends text-xl"></i>
+                    </div>
+                    <h3 class="font-semibold text-gray-800">Nama Tamu Unlimited</h3>
+                </div>
+                <div class="feature-card bg-white p-6 shadow-md text-center border border-accent-color">
+                    <div class="accent-bg text-white w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <i class="fas fa-broadcast-tower text-xl"></i>
+                    </div>
+                    <h3 class="font-semibold text-gray-800">Livestreaming</h3>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Catalog Section -->
+    <section id="katalog" class="py-16 px-4">
+        <div class="container mx-auto">
+            <h2 class="text-3xl font-bold text-center text-gray-800 mb-12">Katalog Undangan</h2>
+            
+            <!-- Search and Filter -->
+            <div class="max-w-4xl mx-auto mb-8">
+                <!-- Search Bar -->
+                <div class="relative mb-6">
+                    <input 
+                        type="text" 
+                        id="searchInput" 
+                        placeholder="Cari undangan..."
+                        class="w-full px-4 py-3 pl-12 border border-accent-color rounded-full focus:outline-none focus:border-accent-color"
+                    >
+                    <i class="fas fa-search absolute left-4 top-1/2 transform -translate-y-1/2 accent-text"></i>
+                </div>
+                
+                <!-- Category Filter -->
+                <div id="categoryFilter" class="flex flex-wrap gap-2 justify-center">
+                    <!-- Categories will be dynamically added here -->
+                </div>
+            </div>
+            
+            <!-- Product Grid -->
+            <div id="productGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <!-- Products will be dynamically added here -->
+            </div>
+            
+            <!-- Pagination -->
+            <div id="pagination" class="flex justify-center mt-8 space-x-2">
+                <!-- Pagination buttons will be dynamically added here -->
+            </div>
+            
+            <!-- Loading State -->
+            <div id="loadingState" class="text-center py-12">
+                <i class="fas fa-spinner fa-spin text-4xl accent-text"></i>
+                <p class="mt-4 text-gray-600">Memuat katalog...</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Notes Section -->
+    <section id="catatan" class="py-16 px-4 bg-white">
+        <div class="container mx-auto max-w-6xl">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <!-- Kotak 1: BONUS -->
+                <div class="bg-gradient-to-br from-purple-500 to-pink-500 rounded-2xl p-8 text-white text-center shadow-xl">
+                    <div class="mb-4">
+                        <i class="fas fa-gift text-4xl"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-4">BONUS</h3>
+                    <p class="text-sm leading-relaxed">
+                        Bonus Template Wedding Budgeting di setiap pembelian dengan syarat follow instagram kami @iiwedding_undangan_digital. Silahkan DM instagram kami untuk meng-klaim bonusnya.
+                    </p>
+                </div>
+                
+                <!-- Kotak 2: CATATAN -->
+                <div class="bg-gradient-to-br from-blue-500 to-cyan-500 rounded-2xl p-8 text-white text-center shadow-xl">
+                    <div class="mb-4">
+                        <i class="fas fa-clipboard-list text-4xl"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-4">CATATAN</h3>
+                    <p class="text-sm leading-relaxed">
+                        Waktu pengerjaan 3-7 hari tergantung banyaknya antrian. Namun khusus yang ada label "kilat" bisa kurang dari 3 hari pengerjaan. Gratis revisi 3x kali. Selebihnya ada biaya tambahan 15k
+                    </p>
+                </div>
+                
+                <!-- Kotak 3: PERHATIAN -->
+                <div class="bg-gradient-to-br from-orange-500 to-red-500 rounded-2xl p-8 text-white text-center shadow-xl">
+                    <div class="mb-4">
+                        <i class="fas fa-exclamation-triangle text-4xl"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-4">PERHATIAN</h3>
+                    <p class="text-sm leading-relaxed">
+                        Untuk tampilan terbaik, mohon untuk menggunakan Browser Chrome / Safari. Karena tampilan tema desain tidak mendukung browser bawaan HP atau Dark Mode (Mode Malam).
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white py-8 px-4">
+        <div class="container mx-auto text-center">
+            <div class="mb-4">
+                <img src="https://i.ibb.co.com/tMhCh0FJ/Logo-Warna-2x-Kompres.png" alt="iiwedding" class="h-12 w-auto mx-auto mb-2">
+                <h3 class="text-xl font-bold">iiwedding</h3>
+                <p class="text-gray-400">Pusat Undangan Digital</p>
+            </div>
+            <div class="flex justify-center space-x-4 mb-4">
+                <a href="https://www.instagram.com/iiwedding_undangan_digital?igsh=MTZja2J5aTI3c3llbg==" 
+                   target="_blank" class="hover:text-accent-color transition-colors">
+                    <i class="fab fa-instagram text-xl"></i>
+                </a>
+                <a href="https://api.whatsapp.com/send?phone=6282138860484&text=Halo%20kak%20%F0%9F%A4%97%20Saya%20mau%20tanya%20tentang%20undangan%20digital%20iiwedding" 
+                   target="_blank" class="hover:text-accent-color transition-colors">
+                    <i class="fab fa-whatsapp text-xl"></i>
+                </a>
+            </div>
+            <p class="text-gray-400 text-sm">
+                © 2024 iiwedding. All rights reserved.
+            </p>
+        </div>
+    </footer>
+
+    <script>
+        // Product data from CSV
+        const csvData = `Nama;Kategori 1;Harga;Link Preview;Link Gambar Produk;Keterangan Tambahan
+Sunda 1;Adat;99000;https://app.smstory.id/pilihan-tema/sunda-01?sr=iiwedding;https://i.ibb.co.com/Rkjn0dzm/01-Sunda-01.png;
+Jawa 1;Adat;99000;https://app.smstory.id/pilihan-tema/jawa-01?sr=iiwedding;https://i.ibb.co.com/hR9CbpDv/02-Jawa-01.png;
+Minang 1;Adat;99000;https://app.smstory.id/pilihan-tema/minang-01?sr=iiwedding;https://i.ibb.co.com/m5j4cHNw/03-Minang-01.png;
+Psh-01;Alam;99000;https://app.smstory.id/pilihan-tema/psh-01?sr=iiwedding;https://i.ibb.co.com/5XRf9vBY/04-PSH-01.png;
+Psh-02;Alam;99000;https://app.smstory.id/pilihan-tema/psh-02?sr=iiwedding;https://i.ibb.co.com/3Y0jpsCD/05-PSH-02.png;
+Psh-03;Alam;99000;https://app.smstory.id/pilihan-tema/psh-03?sr=iiwedding;https://i.ibb.co.com/h116tDrh/06-PSH-03.png;
+Psh-04;Alam;99000;https://app.smstory.id/pilihan-tema/psh-04?sr=iiwedding;https://i.ibb.co.com/cKt19Xp2/07-PSH-04.png;
+Psh-05;Alam;99000;https://app.smstory.id/pilihan-tema/psh-05?sr=iiwedding;https://i.ibb.co.com/k2rQstdR/08-PSH-05.png;
+Psh-06;Alam;99000;https://app.smstory.id/pilihan-tema/psh-06?sr=iiwedding;https://i.ibb.co.com/pBhwF7mm/09-PSH-06.png;
+Mss-01;Bunga;99000;https://app.smstory.id/pilihan-tema/mss-01?sr=iiwedding;https://i.ibb.co.com/bMMcrbQB/10-MSS-01.png;
+Mss-02;Bunga;99000;https://app.smstory.id/pilihan-tema/mss-02?sr=iiwedding;https://i.ibb.co.com/QjJfc6YT/11-MSS-02.png;
+Mss-03;Bunga;99000;https://app.smstory.id/pilihan-tema/mss-03?sr=iiwedding;https://i.ibb.co.com/FbgYwBvF/12-MSS-03.png;
+Mss-04;Bunga;99000;https://app.smstory.id/pilihan-tema/mss-04?sr=iiwedding;https://i.ibb.co.com/C56W3S35/13-MSS-04.png;
+Mss-05;Bunga;99000;https://app.smstory.id/pilihan-tema/mss-05?sr=iiwedding;https://i.ibb.co.com/GvbzYZgH/14-MSS-05.png;
+Mss-06;Bunga;99000;https://app.smstory.id/pilihan-tema/mss-06?sr=iiwedding;https://i.ibb.co.com/84xGkZWj/15-MSS-06.png;
+Nursa-01;Elegant;99000;https://app.smstory.id/pilihan-tema/nursa-01?sr=iiwedding;https://i.ibb.co.com/8DyrSdCL/16-Nursa-01.png;
+Nursa-02;Elegant;99000;https://app.smstory.id/pilihan-tema/nursa-02?sr=iiwedding;https://i.ibb.co.com/qPj7k5y/17-Nursa-02.png;
+Nursa-03;Elegant;99000;https://app.smstory.id/pilihan-tema/nursa-03?sr=iiwedding;https://i.ibb.co.com/fRsRDzD/18-Nursa-03.png;
+Nursa-04;Elegant;99000;https://app.smstory.id/pilihan-tema/nursa-04?sr=iiwedding;https://i.ibb.co.com/vCQmZqRN/19-Nursa-04.png;
+Nursa-05;Elegant;99000;https://app.smstory.id/pilihan-tema/nursa-05?sr=iiwedding;https://i.ibb.co.com/rK7n8VKy/20-Nursa-05.png;
+Nursa-06;Elegant;99000;https://app.smstory.id/pilihan-tema/nursa-06?sr=iiwedding;https://i.ibb.co.com/G35B0SC9/21-Nursa-06.png;
+Love-Cartoon-01;Islami;99000;https://app.smstory.id/pilihan-tema/love-cartoon-01?sr=iiwedding;https://i.ibb.co.com/G48JPDpz/22-LOVE-CARTOON-01.png;
+Love-Cartoon-02;Islami;99000;https://app.smstory.id/pilihan-tema/love-cartoon-02?sr=iiwedding;https://i.ibb.co.com/gMhFfnJR/23-LOVE-CARTOON-02.png;
+Love-Cartoon-03;Islami;99000;https://app.smstory.id/pilihan-tema/love-cartoon-03?sr=iiwedding;https://i.ibb.co.com/WNtP6vmJ/24-LOVE-CARTOON-03.png;
+Butterfly-Fx-01;Alam;99000;https://app.smstory.id/pilihan-tema/butterfly-fx-01?sr=iiwedding;https://i.ibb.co.com/Vc8F6Spy/25-Butterfly-FX-01.png;
+Butterfly-Fx-02;Alam;99000;https://app.smstory.id/pilihan-tema/butterfly-fx-02?sr=iiwedding;https://i.ibb.co.com/x8LCydnK/26-Butterfly-FX-02.png;
+Butterfly-Fx-03;Alam;99000;https://app.smstory.id/pilihan-tema/butterfly-fx-03?sr=iiwedding;https://i.ibb.co.com/K8bwBQ7/27-Butterfly-FX-03.png;
+Swn-01;Elegant;99000;https://app.smstory.id/pilihan-tema/swn-01?sr=iiwedding;https://i.ibb.co.com/WNjybWKS/28-SWN-01.png;
+Swn-02;Elegant;99000;https://app.smstory.id/pilihan-tema/swn-02?sr=iiwedding;https://i.ibb.co.com/2mgTnQy/29-SWN-02.png;
+Swn-03;Elegant;99000;https://app.smstory.id/pilihan-tema/swn-03?sr=iiwedding;https://i.ibb.co.com/C5GcrjDj/30-SWN-03.png;
+Swn-04;Elegant;99000;https://app.smstory.id/pilihan-tema/swn-04?sr=iiwedding;https://i.ibb.co.com/mFFBGxQH/31-SWN-04.png;
+Swn-05;Elegant;99000;https://app.smstory.id/pilihan-tema/swn-05?sr=iiwedding;https://i.ibb.co.com/TxZd7kwD/32-SWN-05.png;
+Swn-06;Elegant;99000;https://app.smstory.id/pilihan-tema/swn-06?sr=iiwedding;https://i.ibb.co.com/prWpcvS9/33-SWN-06.png;
+Swn-07;Elegant;99000;https://app.smstory.id/pilihan-tema/swn-07?sr=iiwedding;https://i.ibb.co.com/4Zw1KHhX/34-SWN-07.png;
+Swn-08;Elegant;99000;https://app.smstory.id/pilihan-tema/swn-08?sr=iiwedding;https://i.ibb.co.com/WNB6Xwtr/35-SWN-08.png;
+Swn-09;Elegant;99000;https://app.smstory.id/pilihan-tema/swn-09?sr=iiwedding;https://i.ibb.co.com/99BxCF6q/36-SWN-09.png;
+Wavy-Sfe-01;Bunga;99000;https://app.smstory.id/pilihan-tema/wavy-sfe-01?sr=iiwedding;https://i.ibb.co.com/v4g3JRQS/37-Wavy-SFE-01.jpg;
+Wavy-Sfe-02;Bunga;99000;https://app.smstory.id/pilihan-tema/wavy-sfe-02?sr=iiwedding;https://i.ibb.co.com/cckMnfJ1/38-Wavy-SFE-02.jpg;
+Wavy-Sfe-03;Bunga;99000;https://app.smstory.id/pilihan-tema/wavy-sfe-03?sr=iiwedding;https://i.ibb.co.com/LXQmRSyL/39-Wavy-SFE-03.jpg;
+Wavy-Sfe-04;Bunga;99000;https://app.smstory.id/pilihan-tema/wavy-sfe-04?sr=iiwedding;https://i.ibb.co.com/Ngs3rSDB/40-Wavy-SFE-04.jpg;
+Wavy-Sfe-05;Bunga;99000;https://app.smstory.id/pilihan-tema/wavy-sfe-05?sr=iiwedding;https://i.ibb.co.com/fVGdtpGg/41-Wavy-SFE-05.jpg;
+Wavy-Sfe-06;Bunga;99000;https://app.smstory.id/pilihan-tema/wavy-sfe-06?sr=iiwedding;https://i.ibb.co.com/1YWVrD1w/42-Wavy-SFE-06.jpg;
+Wavy-Sfe-07;Bunga;99000;https://app.smstory.id/pilihan-tema/wavy-sfe-07?sr=iiwedding;https://i.ibb.co.com/qMBVdLzk/43-Wavy-SFE-07.jpg;
+Wavy-Sfe-08;Bunga;99000;https://app.smstory.id/pilihan-tema/wavy-sfe-08?sr=iiwedding;https://i.ibb.co.com/LhzSNLQG/44-Wavy-SFE-08.jpg;
+Wavy-Sfe-09;Bunga;99000;https://app.smstory.id/pilihan-tema/wavy-sfe-09?sr=iiwedding;https://i.ibb.co.com/HfhHYFTj/45-Wavy-SFE-09.jpg;
+Aqiqah-Givemeart-Mks-01;Aqiqah;99000;https://app.smstory.id/pilihan-tema/aqiqah-givemeart-mks-01?sr=iiwedding;https://i.ibb.co.com/x8fqPbyY/46-Aqiqah-Givemeart-Mks-01.png;
+Aqiqah-Givemeart-Mks-02;Aqiqah;99000;https://app.smstory.id/pilihan-tema/aqiqah-givemeart-mks-02?sr=iiwedding;https://i.ibb.co.com/7ddDmpSM/47-Aqiqah-Givemeart-Mks-02.png;
+Aqiqah-Givemeart-Mks-03;Aqiqah;99000;https://app.smstory.id/pilihan-tema/aqiqah-givemeart-mks-03?sr=iiwedding;https://i.ibb.co.com/k24BSrFb/48-Aqiqah-Givemeart-Mks-03.png;
+Ethnic-Sm-01;Batik;99000;https://app.smstory.id/pilihan-tema/ethnic-sm-01?sr=iiwedding;https://i.ibb.co.com/B5MvMMRV/49-Ethnic-SM-01.jpg;
+Ethnic-Sm-02;Batik;99000;https://app.smstory.id/pilihan-tema/ethnic-sm-02?sr=iiwedding;https://i.ibb.co.com/99ZWzZYb/50-Ethnic-SM-02.jpg;
+Ethnic-Sm-03;Batik;99000;https://app.smstory.id/pilihan-tema/ethnic-sm-03?sr=iiwedding;https://i.ibb.co.com/Z6QpLn2F/51-Ethnic-SM-03.jpg;
+Autoplay-Floral-Dance-01;Bunga;99000;https://app.smstory.id/pilihan-tema/autoplay-floral-dance-01?sr=iiwedding;https://i.ibb.co.com/KpBGLwwT/52-Autoplay-Floral-Dance-01.png;
+Autoplay-Floral-Dance-02;Bunga;99000;https://app.smstory.id/pilihan-tema/autoplay-floral-dance-02?sr=iiwedding;https://i.ibb.co.com/PffKr5C/53-Autoplay-Floral-Dance-02.png;
+Autoplay-Floral-Dance-03;Bunga;99000;https://app.smstory.id/pilihan-tema/autoplay-floral-dance-03?sr=iiwedding;https://i.ibb.co.com/TfXFZh0/54-Autoplay-Floral-Dance-03.png;
+Autoplay-Floral-Dance-04;Bunga;99000;https://app.smstory.id/pilihan-tema/autoplay-floral-dance-04?sr=iiwedding;https://i.ibb.co.com/TM8stBsV/55-Autoplay-Floral-Dance-04.png;
+Autoplay-Floral-Dance-05;Bunga;99000;https://app.smstory.id/pilihan-tema/autoplay-floral-dance-05?sr=iiwedding;https://i.ibb.co.com/DS2tLr3/56-Autoplay-Floral-Dance-05.png;
+Autoplay-Floral-Dance-06;Bunga;99000;https://app.smstory.id/pilihan-tema/autoplay-floral-dance-06?sr=iiwedding;https://i.ibb.co.com/B2LSH5D6/57-Autoplay-Floral-Dance-06.png;
+Autoplay-Floral-Dance-07;Bunga;99000;https://app.smstory.id/pilihan-tema/autoplay-floral-dance-07?sr=iiwedding;https://i.ibb.co.com/gbgV4kc9/58-Autoplay-Floral-Dance-07.png;
+Autoplay-Floral-Dance-08;Bunga;99000;https://app.smstory.id/pilihan-tema/autoplay-floral-dance-08?sr=iiwedding;https://i.ibb.co.com/q3c0JJvZ/59-Autoplay-Floral-Dance-08.png;
+Autoplay-Floral-Dance-09;Bunga;99000;https://app.smstory.id/pilihan-tema/autoplay-floral-dance-09?sr=iiwedding;https://i.ibb.co.com/rKrfrvZT/60-Autoplay-Floral-Dance-09.png;
+Full-Pattern-01;Bunga;99000;https://app.smstory.id/pilihan-tema/full-pattern-01?sr=iiwedding;https://i.ibb.co.com/rRnBdJ7b/61-Full-Pattern-01.jpg;
+Full-Pattern-02;Bunga;99000;https://app.smstory.id/pilihan-tema/full-pattern-02?sr=iiwedding;https://i.ibb.co.com/WmQKfMZ/62-Full-Pattern-02.jpg;
+Full-Pattern-03;Bunga;99000;https://app.smstory.id/pilihan-tema/full-pattern-03?sr=iiwedding;https://i.ibb.co.com/vnfkWq2/63-Full-Pattern-03.jpg;
+Full-Pattern-Sfe-04;Bunga;99000;https://app.smstory.id/pilihan-tema/full-pattern-sfe-04?sr=iiwedding;https://i.ibb.co.com/21Cj27Pq/64-Full-Pattern-04.jpg;
+Full-Pattern-Sfe-05;Bunga;99000;https://app.smstory.id/pilihan-tema/full-pattern-sfe-05?sr=iiwedding;https://i.ibb.co.com/G31x8Zvx/65-Full-Pattern-05.jpg;
+Full-Pattern-Sfe-06;Bunga;99000;https://app.smstory.id/pilihan-tema/full-pattern-sfe-06?sr=iiwedding;https://i.ibb.co.com/HT1FSZpt/66-Full-Pattern-06.jpg;
+Snowflakes-Effect-01;Bunga;99000;https://app.smstory.id/pilihan-tema/snowflakes-effect-01?sr=iiwedding;https://i.ibb.co.com/S75Ng3hh/67-Snowflakes-Effect-01.jpg;
+Snowflakes-Effect-02;Bunga;99000;https://app.smstory.id/pilihan-tema/snowflakes-effect-02?sr=iiwedding;https://i.ibb.co.com/993XDWhg/68-Snowflakes-Effect-02.jpg;
+Snowflakes-Effect-03;Bunga;99000;https://app.smstory.id/pilihan-tema/snowflakes-effect-03?sr=iiwedding;https://i.ibb.co.com/twpVmGww/69-Snowflakes-Effect-03.jpg;
+Snowflakes-Effect-04;Bunga;99000;https://app.smstory.id/pilihan-tema/snowflakes-effect-04?sr=iiwedding;https://i.ibb.co.com/ZR55BGvK/70-Snowflakes-Effect-04.jpg;
+Snowflakes-Effect-05;Bunga;99000;https://app.smstory.id/pilihan-tema/snowflakes-effect-05?sr=iiwedding;https://i.ibb.co.com/RTQP93P5/71-Snowflakes-Effect-05.jpg;
+Snowflakes-Effect-06;Bunga;99000;https://app.smstory.id/pilihan-tema/snowflakes-effect-06?sr=iiwedding;https://i.ibb.co.com/DPBSY7w8/72-Snowflakes-Effect-06.jpg;
+Snowflakes-Effect-07;Bunga;99000;https://app.smstory.id/pilihan-tema/snowflakes-effect-07?sr=iiwedding;https://i.ibb.co.com/LhYJjQ8D/73-Snowflakes-Effect-07.jpg;
+Snowflakes-Effect-08;Bunga;99000;https://app.smstory.id/pilihan-tema/snowflakes-effect-08?sr=iiwedding;https://i.ibb.co.com/b5KzcXxT/74-Snowflakes-Effect-08.jpg;
+Snowflakes-Effect-09;Bunga;99000;https://app.smstory.id/pilihan-tema/snowflakes-effect-09?sr=iiwedding;https://i.ibb.co.com/LzyWS0Qf/75-Snowflakes-Effect-09.jpg;
+Snowflakes-Effect-10;Bunga;99000;https://app.smstory.id/pilihan-tema/snowflakes-effect-10?sr=iiwedding;https://i.ibb.co.com/4ZTcHR3t/76-Snowflakes-Effect-10.jpg;
+Snowflakes-Effect-11;Bunga;99000;https://app.smstory.id/pilihan-tema/snowflakes-effect-11?sr=iiwedding;https://i.ibb.co.com/xqPVvSXX/77-Snowflakes-Effect-11.jpg;
+Snowflakes-Effect-12;Bunga;99000;https://app.smstory.id/pilihan-tema/snowflakes-effect-12?sr=iiwedding;https://i.ibb.co.com/C5YrQmMw/78-Snowflakes-Effect-12.jpg;
+Wide-01;Alam;99000;https://app.smstory.id/pilihan-tema/wide-01?sr=iiwedding;https://i.ibb.co.com/kVxRwgdg/79-Wide-01.jpg;
+Wide-02;Alam;99000;https://app.smstory.id/pilihan-tema/wide-02?sr=iiwedding;https://i.ibb.co.com/fzrtxBLP/80-Wide-02.jpg;
+Wide-03;Alam;99000;https://app.smstory.id/pilihan-tema/wide-03?sr=iiwedding;https://i.ibb.co.com/G3pRHKmR/81-Wide-03.jpg;
+Wide-04;Alam;99000;https://app.smstory.id/pilihan-tema/wide-04?sr=iiwedding;https://i.ibb.co.com/nNN1WNQb/82-Wide-04.jpg;
+Wide-05;Alam;99000;https://app.smstory.id/pilihan-tema/wide-05?sr=iiwedding;https://i.ibb.co.com/SDg6VTRB/83-Wide-05.jpg;
+Wide-06;Alam;99000;https://app.smstory.id/pilihan-tema/wide-06?sr=iiwedding;https://i.ibb.co.com/Q70DJnzY/84-Wide-06.jpg;
+Sm-01;Alam;99000;https://app.smstory.id/pilihan-tema/sm-01?sr=iiwedding;https://i.ibb.co.com/N6H2rvth/85-SM-01.jpg;
+Sm-02;Alam;99000;https://app.smstory.id/pilihan-tema/sm-02?sr=iiwedding;https://i.ibb.co.com/XwZCMyD/86-SM-02.jpg;
+Sm-03;Alam;99000;https://app.smstory.id/pilihan-tema/sm-03?sr=iiwedding;https://i.ibb.co.com/9kyR3gr0/87-SM-03.jpg;
+Sm-04;Alam;99000;https://app.smstory.id/pilihan-tema/sm-04?sr=iiwedding;https://i.ibb.co.com/GQTk0bwf/88-SM-04.jpg;
+Sm-05;Alam;99000;https://app.smstory.id/pilihan-tema/sm-05?sr=iiwedding;https://i.ibb.co.com/CpmgwV6h/89-SM-05.jpg;
+Sm-06;Alam;99000;https://app.smstory.id/pilihan-tema/sm-06?sr=iiwedding;https://i.ibb.co.com/4xjKBYd/90-SM-06.jpg;
+Sm-07;Alam;99000;https://app.smstory.id/pilihan-tema/sm-07?sr=iiwedding;https://i.ibb.co.com/8nvffsF4/91-SM-07.jpg;
+Sm-08;Alam;99000;https://app.smstory.id/pilihan-tema/sm-08?sr=iiwedding;https://i.ibb.co.com/YTwrqF9T/92-SM-08.jpg;
+Sm-09;Alam;99000;https://app.smstory.id/pilihan-tema/sm-09?sr=iiwedding;https://i.ibb.co.com/hxNzxQT0/93-SM-09.jpg;
+Card-01-Mv;Bunga;99000;https://app.smstory.id/pilihan-tema/card-01-mv?sr=iiwedding;https://i.ibb.co.com/Gfd8QR8V/94-Card-01-MV.jpg;
+Card-02Mv;Bunga;99000;https://app.smstory.id/pilihan-tema/card-02-mv?sr=iiwedding;https://i.ibb.co.com/BKf7fQwX/95-Card-02-MV.jpg;
+Card-03-Mv;Bunga;99000;https://app.smstory.id/pilihan-tema/card-03-mv?sr=iiwedding;https://i.ibb.co.com/dwN3bnTH/96-Card-03-MV.jpg;
+Card-04-Mv-Full-Dark;Dark;99000;https://app.smstory.id/pilihan-tema/card-04-mv-full-dark?sr=iiwedding;https://i.ibb.co.com/4ZfZ3VxZ/97-Card-04-MV-Full-Dark.jpg;
+Card-05-Mv-Full-Dark;Dark;99000;https://app.smstory.id/pilihan-tema/card-05-mv-full-dark?sr=iiwedding;https://i.ibb.co.com/23HvcdSS/98-Card-05-MV-Full-Dark.jpg;
+Card-06-Mv-Full-Dark;Dark;99000;https://app.smstory.id/pilihan-tema/card-06-mv-full-dark?sr=iiwedding;https://i.ibb.co.com/zHmghKMW/99-Card-06-MV-Full-Dark.jpg;
+Boxed-01-Mv;Bunga;99000;https://app.smstory.id/pilihan-tema/boxed-01-mv?sr=iiwedding;https://i.ibb.co.com/1tnNSgKj/100-Boxed-01-MV.jpg;
+Boxed-02-Mv;Bunga;99000;https://app.smstory.id/pilihan-tema/boxed-02-mv?sr=iiwedding;https://i.ibb.co.com/S7V9y9KK/101-Boxed-02-MV.jpg;
+Boxed-03-Mv;Bunga;99000;https://app.smstory.id/pilihan-tema/boxed-03-mv?sr=iiwedding;https://i.ibb.co.com/27kjKf2n/102-Boxed-03-MV.jpg;
+Boxed-04-Mv;Bunga;99000;https://app.smstory.id/pilihan-tema/boxed-04-mv?sr=iiwedding;https://i.ibb.co.com/q398LjbD/103-Boxed-04-MV.jpg;
+Boxed-05-Mv;Bunga;99000;https://app.smstory.id/pilihan-tema/boxed-05-mv?sr=iiwedding;https://i.ibb.co.com/23Cb4Sph/104-Boxed-05-MV.jpg;
+Boxed-06-Mv;Bunga;99000;https://app.smstory.id/pilihan-tema/boxed-06-mv?sr=iiwedding;https://i.ibb.co.com/wZQT0pT6/105-Boxed-06-MV.jpg;
+Frame-01;Bunga;99000;https://app.smstory.id/pilihan-tema/frame-01?sr=iiwedding;https://i.ibb.co.com/TqLY1VLQ/106-Frame-01.jpg;
+Frame-02;Bunga;99000;https://app.smstory.id/pilihan-tema/frame-02?sr=iiwedding;https://i.ibb.co.com/zWcMcpN2/107-Frame-02.jpg;
+Frame-03;Bunga;99000;https://app.smstory.id/pilihan-tema/frame-03?sr=iiwedding;https://i.ibb.co.com/dwVrQQP6/108-Frame-03.jpg;
+Frame-04;Bunga;99000;https://app.smstory.id/pilihan-tema/frame-04?sr=iiwedding;https://i.ibb.co.com/GQ42Twcc/109-Frame-04.jpg;
+Frame-05;Bunga;99000;https://app.smstory.id/pilihan-tema/frame-05?sr=iiwedding;https://i.ibb.co.com/xqRwsrBx/110-Frame-05.jpg;
+Frame-06;Bunga;99000;https://app.smstory.id/pilihan-tema/frame-06?sr=iiwedding;https://i.ibb.co.com/1ffdnPsZ/111-Frame-06.jpg;
+Frame-07;Bunga;99000;https://app.smstory.id/pilihan-tema/frame-07?sr=iiwedding;https://i.ibb.co.com/933j6Qd9/112-Frame-07.jpg;
+Frame-08;Bunga;99000;https://app.smstory.id/pilihan-tema/frame-08?sr=iiwedding;https://i.ibb.co.com/KxrX7nkv/113-Frame-08.jpg;
+Frame-09;Bunga;99000;https://app.smstory.id/pilihan-tema/frame-09?sr=iiwedding;https://i.ibb.co.com/SXjfqj5j/114-Frame-09.jpg;
+Simple-Corner-01;Bunga;99000;https://app.smstory.id/pilihan-tema/simple-corner-01?sr=iiwedding;https://i.ibb.co.com/h1wHLHNB/115-Simple-Corner-01.jpg;
+Simple-Corner-02;Bunga;99000;https://app.smstory.id/pilihan-tema/simple-corner-02?sr=iiwedding;https://i.ibb.co.com/5gR50grM/116-Simple-Corner-02.jpg;
+Simple-Corner-03;Bunga;99000;https://app.smstory.id/pilihan-tema/simple-corner-03?sr=iiwedding;https://i.ibb.co.com/cSMzm1yc/117-Simple-Corner-03.jpg;
+Simple-Corner-04;Bunga;99000;https://app.smstory.id/pilihan-tema/simple-corner-04?sr=iiwedding;https://i.ibb.co.com/0pjtnMzr/118-Simple-Corner-04.jpg;
+Simple-Corner-05;Bunga;99000;https://app.smstory.id/pilihan-tema/simple-corner-05?sr=iiwedding;https://i.ibb.co.com/bgTxSjWG/119-Simple-Corner-05.jpg;
+Simple-Corner-06;Bunga;99000;https://app.smstory.id/pilihan-tema/simple-corner-06?sr=iiwedding;https://i.ibb.co.com/B2WYqSgS/120-Simple-Corner-06.jpg;
+Netflix;Luxury;140000;https://invite.truelove.my.id/tema-netflix/;https://invite.truelove.my.id/wp-content/uploads/2025/07/tema-netflix-thumb.jpg;Fast
+The Lux 1;Luxury;140000;https://invite.truelove.my.id/tema-the-lux-1/?to=Nama+Tamu;https://invite.truelove.my.id/wp-content/uploads/2025/05/lux1.webp;Fast
+The Lux 2;Luxury;140000;https://invite.truelove.my.id/tema-lux-2/?to=Nama+Tamu;https://invite.truelove.my.id/wp-content/uploads/2025/05/lux2.webp;Fast
+The Lux 3;Luxury;140000;https://invite.truelove.my.id/tema-lux-3/?to=Nama+Tamu;https://invite.truelove.my.id/wp-content/uploads/2025/05/lux3.webp;Fast
+The Lux 4;Luxury;140000;https://invite.truelove.my.id/tema-lux-4/?to=Nama+Tamu;https://invite.truelove.my.id/wp-content/uploads/2025/05/lux4.webp;Fast
+The Lux 5;Luxury;140000;https://invite.truelove.my.id/tema-lux-5/?to=Nama+Tamu;https://invite.truelove.my.id/wp-content/uploads/2025/05/lux5.webp;Fast
+The Lux 6;Luxury;140000;https://invite.truelove.my.id/tema-lux-6/?to=Nama+Tamu;https://invite.truelove.my.id/wp-content/uploads/2025/05/lux6.webp;Fast
+The Lux 7;Luxury;140000;https://invite.truelove.my.id/tema-lux-7/?to=Nama+Tamu;https://invite.truelove.my.id/wp-content/uploads/2025/05/lux7.webp;Fast
+The Lux 8;Luxury;140000;https://invite.truelove.my.id/tema-lux-8/?to=Nama+Tamu;https://invite.truelove.my.id/wp-content/uploads/2025/05/lux8.webp;Fast
+The Lux 9;Luxury;140000;https://invite.truelove.my.id/tema-lux-9/?to=Nama+Tamu;https://invite.truelove.my.id/wp-content/uploads/2025/05/Lux-9-1.webp;Fast
+The Lux 10;Luxury;140000;https://invite.truelove.my.id/temea-lux-10/?to=Nama+Tamu;https://invite.truelove.my.id/wp-content/uploads/2025/06/Lux10.webp;Fast
+Jawa 2;Adat;140000;https://invite.truelove.my.id/adat-jawa-1/?to=Nama+Tamu;https://invite.truelove.my.id/wp-content/uploads/2025/06/temajawa1.jpg;Fast
+Jawa 3;Adat;140000;https://invite.truelove.my.id/adat-jawa-2/?to=Nama+Tamu;https://invite.truelove.my.id/wp-content/uploads/2025/06/adat-jawa-2.jpg;Fast
+Jawa 4;Adat;140000;https://invite.truelove.my.id/tema-jawa-3/?to=Nama+Tamu;https://invite.truelove.my.id/wp-content/uploads/2025/06/ADAT-JAWA-3.jpg;Fast
+Sunda 2;Adat;140000;https://invite.truelove.my.id/sunda-1/?to=Nama+Tamu;https://invite.truelove.my.id/wp-content/uploads/2025/06/ADAT-SUNDA.jpg;Fast
+Batak 1;Adat;140000;https://invite.truelove.my.id/tema-adat-batak-1/?to=Nama+Tamu;https://invite.truelove.my.id/wp-content/uploads/2025/06/temabatak1.jpg;Fast
+Betawi 1;Adat;140000;https://invite.truelove.my.id/betawi-1/?to=Nama+Tamu;https://invite.truelove.my.id/wp-content/uploads/2025/06/betawi-1.jpg;Fast
+Dayak 1;Adat;140000;https://invite.truelove.my.id/dayak-1/;https://invite.truelove.my.id/wp-content/uploads/2025/06/temadayak1.jpg;Fast
+Minang 2;Adat;140000;https://invite.truelove.my.id/minang-1/?to=Nama+Tamu;https://invite.truelove.my.id/wp-content/uploads/2025/06/temaminang1.jpg;Fast
+Nias 1;Adat;140000;https://invite.truelove.my.id/adat-nias-1/?to=Nama+Tamu;https://invite.truelove.my.id/wp-content/uploads/2025/06/ADAT-NIAS.jpg;Fast
+Bali 1;Adat;140000;https://invite.truelove.my.id/adat-bali-1/?to=Nama+Tamu;https://invite.truelove.my.id/wp-content/uploads/2025/06/adat-Bali.jpg;Fast
+Japanese Sakura;Adat;140000;https://invite.truelove.my.id/hanami-sakura/?to=Nama+Tamu;https://invite.truelove.my.id/wp-content/uploads/2025/06/hanami-sakura.jpg;Fast
+Japanese Hanaui Sarang;Adat;140000;https://invite.truelove.my.id/hanaui-sarang/?to=Nama+Tamu;https://invite.truelove.my.id/wp-content/uploads/2025/06/hanuisarang.jpg;Fast
+Amethyst Dream;3D Motion;140000;https://invite.truelove.my.id/wedding-amethyst-dream/;https://invite.truelove.my.id/wp-content/uploads/2025/06/Midnight-04-Large.jpeg;Fast
+Crimson Romance;3D Motion;140000;https://invite.truelove.my.id/3d-crimson-romance/;https://invite.truelove.my.id/wp-content/uploads/2025/06/Midnight-03-Large.jpeg;Fast
+Crimson Tanpa Foto;3D Motion;140000;https://invite.truelove.my.id/crimson-tanpa-foto/?to=Nama+Tamu;https://invite.truelove.my.id/wp-content/uploads/2025/06/Midnight-03-Large.jpeg;Fast
+Emerald Romance;3D Motion;140000;https://invite.truelove.my.id/3d-emerald-romance/;https://invite.truelove.my.id/wp-content/uploads/2025/06/Midnight-05-Large.jpeg;Fast
+Midnight Garden;3D Motion;140000;https://invite.truelove.my.id/3d-midnight-garden/;https://invite.truelove.my.id/wp-content/uploads/2025/06/Midnight-01-Large.jpeg;Fast
+Motion Islamic 1;3D Motion;140000;https://invite.truelove.my.id/islamic-motion-1/?to=Nama+Tamu;https://invite.truelove.my.id/wp-content/uploads/2025/09/Mockup-Elemenpress-Islamic-01-Large.jpeg;Fast
+Motion Islamic 2;3D Motion;140000;https://invite.truelove.my.id/islamic-motion-2/?to=Nama+Tamu;https://invite.truelove.my.id/wp-content/uploads/2025/09/Mockup-Elemenpress-Islamic-02-Large.jpeg;Fast
+Motion Islamic 3;3D Motion;140000;https://invite.truelove.my.id/islamic-motion-3/?to=Nama+Tamu;https://invite.truelove.my.id/wp-content/uploads/2025/09/Mockup-Elemenpress-Islamic-03-Large.jpeg;Fast
+Motion Islamic 4;3D Motion;140000;https://invite.truelove.my.id/islamic-motion-4/?to=Nama+Tamu;https://invite.truelove.my.id/wp-content/uploads/2025/09/Mockup-Elemenpress-Islamic-04-Large.jpeg;Fast
+Motion Islamic 5;3D Motion;140000;https://invite.truelove.my.id/islamic-motion-5/?to=Nama+Tamu;https://invite.truelove.my.id/wp-content/uploads/2025/09/Mockup-Elemenpress-Islamic-05-Large.jpeg;Fast
+Royal Twilight;3D Motion;140000;https://invite.truelove.my.id/3d-royal-twilight/;https://invite.truelove.my.id/wp-content/uploads/2025/06/Midnight-02-Large.jpeg;Fast
+3D Adat Bali;3D Motion;140000;https://invite.truelove.my.id/3d-adat-bali/;https://invite.truelove.my.id/wp-content/uploads/2025/08/adatbali3d.jpg;Fast
+3D Adat Batak;3D Motion;140000;https://invite.truelove.my.id/3d-adat-batak;https://invite.truelove.my.id/wp-content/uploads/2025/08/adatbatak3d.jpg;Fast
+3D Adat Betawi;3D Motion;140000;https://invite.truelove.my.id/3d-adat-betawi/;https://invite.truelove.my.id/wp-content/uploads/2025/10/MOCKUP-Heritage-Vol-2-Betawi-Large.jpeg;Fast
+3D Adat Bugis;3D Motion;140000;https://invite.truelove.my.id/3d-adat-bugis-1/?to=Nama+Tamu;https://invite.truelove.my.id/wp-content/uploads/2025/08/Adatbugis.jpg;Fast
+3D Adat Jawa;3D Motion;140000;https://invite.truelove.my.id/3d-motion-jawa-1/;https://invite.truelove.my.id/wp-content/uploads/2025/07/thumb-3djawa.jpeg;Fast
+3D Adat Palembang;3D Motion;140000;https://invite.truelove.my.id/3d-motion-adat-palembang/;https://invite.truelove.my.id/wp-content/uploads/2025/09/MOCKUP-Heritage-Vol-2-Palembang-Large.jpeg;Fast
+Basic 1;Basic;140000;https://invite.truelove.my.id/tema-bassic-1/?to=Nama+Tamu;https://invite.truelove.my.id/wp-content/uploads/2025/06/Bassic-1.jpg;Fast
+Basic 2;Basic;140000;https://invite.truelove.my.id/tema-bassic-2/?to=Nama+Tamu;https://invite.truelove.my.id/wp-content/uploads/2025/06/Bassic-2.jpg;Fast
+Basic 3;Basic;140000;https://invite.truelove.my.id/tema-bassic-3/?to=Nama+Tamu;https://invite.truelove.my.id/wp-content/uploads/2025/06/Bassic-3.jpg;Fast
+Basic 4;Basic;140000;https://invite.truelove.my.id/tema-bassic-4/?to=Nama+Tamu;https://invite.truelove.my.id/wp-content/uploads/2025/06/Bassic-4.jpg;Fast
+Basic 5;Basic;140000;https://invite.truelove.my.id/tema-bassic-5/?to=Nama+Tamu;https://invite.truelove.my.id/wp-content/uploads/2025/06/Bassic-5.jpg;Fast
+Basic 6;Basic;140000;https://invite.truelove.my.id/tema-bassic-6/?to=Nama+Tamu;https://invite.truelove.my.id/wp-content/uploads/2025/06/Bassic-6.jpg;Fast
+Basic 7;Basic;140000;https://invite.truelove.my.id/tema-bassic-7/?to=Nama+Tamu;https://invite.truelove.my.id/wp-content/uploads/2025/06/Bassic-7.jpg;Fast
+Basic 8;Basic;140000;https://invite.truelove.my.id/tema-bassic-8/?to=Nama+Tamu;https://invite.truelove.my.id/wp-content/uploads/2025/06/Bassic-8.jpg;Fast
+Basic 9;Basic;140000;https://invite.truelove.my.id/tema-bassic-9/?to=Nama+Tamu;https://invite.truelove.my.id/wp-content/uploads/2025/06/Bassic-9.jpg;Fast
+Basic 10;Basic;140000;https://invite.truelove.my.id/tema-bassic-10/?to=Nama+Tamu;https://invite.truelove.my.id/wp-content/uploads/2025/06/Bassic-10.jpg;Fast
+Basic 11;Basic;140000;https://invite.truelove.my.id/tema-bassic-11/?to=Nama+Tamu;https://invite.truelove.my.id/wp-content/uploads/2025/06/bassic-11.jpg;Fast
+Basic 12;Basic;140000;https://invite.truelove.my.id/tema-bassic-12/?to=Nama+Tamu;https://invite.truelove.my.id/wp-content/uploads/2025/06/bassic-12.jpg;Fast
+Syar'i 1;Islami;140000;https://invite.truelove.my.id/tema-syari-1/?to=Nama+Tamu;https://invite.truelove.my.id/wp-content/uploads/2025/06/Syari-1.jpg;Fast
+Syar'i 2;Islami;140000;https://invite.truelove.my.id/tema-syari-2/?to=Nama+Tamu;https://invite.truelove.my.id/wp-content/uploads/2025/06/Syari-2.jpg;Fast
+Syar'i 3;Islami;140000;https://invite.truelove.my.id/tema-syari-3/?to=Nama+Tamu;https://invite.truelove.my.id/wp-content/uploads/2025/06/Syari-3.jpg;Fast
+Syar'i 4;Islami;140000;https://invite.truelove.my.id/tema-syari-4/?to=Nama+Tamu;https://invite.truelove.my.id/wp-content/uploads/2025/06/Syari-4.jpg;Fast
+Syar'i 5;Islami;140000;https://invite.truelove.my.id/tema-syari-5/?to=Nama+Tamu;https://invite.truelove.my.id/wp-content/uploads/2025/06/Syari-5.jpg;Fast`;
+
+        // Parse CSV data
+        function parseCSV(csvText) {
+            const lines = csvText.trim().split('\n');
+            const headers = lines[0].split(';');
+            const products = [];
+            
+            for (let i = 1; i < lines.length; i++) {
+                const values = lines[i].split(';');
+                const product = {};
+                
+                headers.forEach((header, index) => {
+                    product[header.trim()] = values[index] ? values[index].trim() : '';
+                });
+                
+                products.push(product);
+            }
+            
+            return products;
+        }
+
+        // Global variables
+        let allProducts = [];
+        let filteredProducts = [];
+        let currentCategory = 'Semua';
+        let searchQuery = '';
+        let currentPage = 1;
+        const productsPerPage = 20;
+
+        // Initialize the app
+        function init() {
+            allProducts = parseCSV(csvData);
+            filteredProducts = [...allProducts];
+            
+            renderCategories();
+            renderProducts();
+            setupEventListeners();
+            
+            // Hide loading state
+            document.getElementById('loadingState').style.display = 'none';
+        }
+
+        // Render category filter buttons
+        function renderCategories() {
+            const categories = ['Semua'];
+            const categorySet = new Set();
+            
+            allProducts.forEach(product => {
+                if (product['Kategori 1']) {
+                    categorySet.add(product['Kategori 1']);
+                }
+            });
+            
+            categories.push(...Array.from(categorySet).sort());
+            
+            const categoryFilter = document.getElementById('categoryFilter');
+            categoryFilter.innerHTML = '';
+            
+            categories.forEach(category => {
+                const button = document.createElement('button');
+                button.textContent = category;
+                button.className = `category-pill px-4 py-2 border-2 border-accent-color text-sm font-medium ${
+                    category === currentCategory ? 'active' : 'bg-white accent-text'
+                }`;
+                button.onclick = () => filterByCategory(category);
+                categoryFilter.appendChild(button);
+            });
+        }
+
+        // Render products
+        function renderProducts() {
+            const productGrid = document.getElementById('productGrid');
+            productGrid.innerHTML = '';
+            
+            const productsToShow = filteredProducts.filter(product => {
+                const matchesCategory = currentCategory === 'Semua' || product['Kategori 1'] === currentCategory;
+                const matchesSearch = product.Nama.toLowerCase().includes(searchQuery.toLowerCase());
+                return matchesCategory && matchesSearch;
+            });
+            
+            if (productsToShow.length === 0) {
+                productGrid.innerHTML = `
+                    <div class="col-span-full text-center py-12">
+                        <i class="fas fa-search text-4xl text-gray-400 mb-4"></i>
+                        <p class="text-gray-600">Tidak ada produk yang ditemukan.</p>
+                    </div>
+                `;
+                document.getElementById('pagination').innerHTML = '';
+                return;
+            }
+            
+            // Reset to page 1 when filters change
+            if (currentPage === 0) currentPage = 1;
+            
+            // Calculate pagination
+            const totalPages = Math.ceil(productsToShow.length / productsPerPage);
+            const startIndex = (currentPage - 1) * productsPerPage;
+            const endIndex = startIndex + productsPerPage;
+            const currentProducts = productsToShow.slice(startIndex, endIndex);
+            
+            currentProducts.forEach((product, index) => {
+                const productCard = createProductCard(product, startIndex + index);
+                productGrid.appendChild(productCard);
+            });
+            
+            // Render pagination
+            renderPagination(totalPages);
+            
+            // Setup lazy loading for images
+            setupLazyLoading();
+        }
+        
+        // Render pagination
+        function renderPagination(totalPages) {
+            const pagination = document.getElementById('pagination');
+            pagination.innerHTML = '';
+            
+            if (totalPages <= 1) return;
+            
+            // Previous button
+            const prevBtn = document.createElement('button');
+            prevBtn.innerHTML = '<i class="fas fa-chevron-left"></i>';
+            prevBtn.className = `px-3 py-2 rounded-lg ${currentPage === 1 ? 'bg-gray-200 text-gray-400 cursor-not-allowed' : 'bg-white border border-accent-color accent-text hover:bg-accent-color hover:text-white'} transition-colors`;
+            prevBtn.disabled = currentPage === 1;
+            prevBtn.onclick = () => {
+                if (currentPage > 1) {
+                    currentPage--;
+                    renderProducts();
+                }
+            };
+            pagination.appendChild(prevBtn);
+            
+            // Page numbers
+            for (let i = 1; i <= totalPages; i++) {
+                // Show max 5 page buttons
+                if (i === 1 || i === totalPages || (i >= currentPage - 1 && i <= currentPage + 1)) {
+                    const pageBtn = document.createElement('button');
+                    pageBtn.textContent = i;
+                    pageBtn.className = `px-3 py-2 rounded-lg ${i === currentPage ? 'accent-bg text-white' : 'bg-white border border-accent-color accent-text hover:bg-accent-color hover:text-white'} transition-colors`;
+                    pageBtn.onclick = () => {
+                        currentPage = i;
+                        renderProducts();
+                    };
+                    pagination.appendChild(pageBtn);
+                } else if (i === currentPage - 2 || i === currentPage + 2) {
+                    const dots = document.createElement('span');
+                    dots.textContent = '...';
+                    dots.className = 'px-2 py-2 text-gray-500';
+                    pagination.appendChild(dots);
+                }
+            }
+            
+            // Next button
+            const nextBtn = document.createElement('button');
+            nextBtn.innerHTML = '<i class="fas fa-chevron-right"></i>';
+            nextBtn.className = `px-3 py-2 rounded-lg ${currentPage === totalPages ? 'bg-gray-200 text-gray-400 cursor-not-allowed' : 'bg-white border border-accent-color accent-text hover:bg-accent-color hover:text-white'} transition-colors`;
+            nextBtn.disabled = currentPage === totalPages;
+            nextBtn.onclick = () => {
+                if (currentPage < totalPages) {
+                    currentPage++;
+                    renderProducts();
+                }
+            };
+            pagination.appendChild(nextBtn);
+        }
+
+        // Create product card element
+        function createProductCard(product, index) {
+            const card = document.createElement('div');
+            card.className = 'product-card bg-white shadow-lg overflow-hidden fade-in';
+            card.style.animationDelay = `${index * 0.05}s`;
+            
+            const formatPrice = (price) => {
+                return new Intl.NumberFormat('id-ID', {
+                    style: 'currency',
+                    currency: 'IDR',
+                    minimumFractionDigits: 0
+                }).format(parseInt(price));
+            };
+            
+            const isFastProduct = product['Keterangan Tambahan'] && product['Keterangan Tambahan'].toLowerCase() === 'fast';
+            
+            card.innerHTML = `
+                <div class="aspect-[3/2] overflow-hidden bg-gray-100 relative">
+                    ${isFastProduct ? '<div class="absolute top-2 right-2 z-10 bg-orange-500 text-white px-2 py-1 rounded-full text-xs font-bold">KILAT</div>' : ''}
+                    <img 
+                        src="${product['Link Gambar Produk']}" 
+                        alt="${product.Nama}"
+                        class="lazy-load w-full h-full object-cover"
+                        loading="lazy"
+                    >
+                </div>
+                <div class="p-4 text-center space-y-2">
+                    <div class="inline-block px-2 py-1 bg-white border border-accent-color accent-text text-xs rounded-full">
+                        ${product['Kategori 1']}
+                    </div>
+                    <h3 class="font-bold text-gray-800 text-base">${product.Nama}</h3>
+                    <p class="font-bold accent-text text-base">${formatPrice(product.Harga)}</p>
+                    <div class="flex gap-2 justify-center">
+                        <a 
+                            href="https://api.whatsapp.com/send?phone=6282138860484&text=Halo%20kak.%20saya%20mau%20pesan%20undangan%20digital%20desain%20${encodeURIComponent(product.Nama)}"
+                            target="_blank"
+                            class="btn-small flex-1 border-2 border-accent-color accent-text py-2 px-3 text-center font-medium accent-hover"
+                        >
+                            Pesan Sekarang
+                        </a>
+                        <a 
+                            href="${product['Link Preview']}"
+                            target="_blank"
+                            class="btn-small flex-1 accent-bg text-white py-2 px-3 text-center font-medium accent-hover-reverse"
+                        >
+                            Lihat Preview
+                        </a>
+                    </div>
+                </div>
+            `;
+            
+            return card;
+        }
+
+        // Filter by category
+        function filterByCategory(category) {
+            currentCategory = category;
+            currentPage = 1; // Reset to page 1 when category changes
+            renderCategories();
+            renderProducts();
+        }
+
+        // Setup event listeners
+        function setupEventListeners() {
+            // Search functionality
+            const searchInput = document.getElementById('searchInput');
+            searchInput.addEventListener('input', (e) => {
+                searchQuery = e.target.value;
+                currentPage = 1; // Reset to page 1 when search changes
+                renderProducts();
+            });
+            
+            // Mobile menu toggle
+            const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+            const mobileMenu = document.getElementById('mobileMenu');
+            
+            mobileMenuBtn.addEventListener('click', () => {
+                mobileMenu.classList.toggle('hidden');
+            });
+            
+            // Smooth scrolling for anchor links
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    const target = document.querySelector(this.getAttribute('href'));
+                    if (target) {
+                        target.scrollIntoView({
+                            behavior: 'smooth',
+                            block: 'start'
+                        });
+                    }
+                });
+            });
+        }
+
+        // Setup lazy loading for images
+        function setupLazyLoading() {
+            const images = document.querySelectorAll('.lazy-load');
+            
+            const imageObserver = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const img = entry.target;
+                        img.classList.add('loaded');
+                        observer.unobserve(img);
+                    }
+                });
+            });
+            
+            images.forEach(img => {
+                imageObserver.observe(img);
+            });
+        }
+
+        // Initialize when DOM is loaded
+        document.addEventListener('DOMContentLoaded', init);
+    </script>
+</body>
+</html>
